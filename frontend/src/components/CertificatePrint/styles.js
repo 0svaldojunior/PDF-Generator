@@ -7,7 +7,7 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 800px;
+  height: 750px;
   width: 100%;
 `;
 
@@ -18,6 +18,7 @@ export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   padding: 10px;
+  margin-bottom: 20px;
 `;
 
 export const GridItem = styled.div`

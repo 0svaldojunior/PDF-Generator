@@ -12,9 +12,6 @@ exports.up = function(knex) {
         table.boolean('signature').notNull();
         table.integer('author').notNull();
         table.integer('course').notNull();
-
-        table.foreign('author').references('student_id').inTable('students');
-        table.foreign('course').references('course_id').inTable('courses');
     });
 };
 

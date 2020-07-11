@@ -6,27 +6,25 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 300px;
+  height: 290px;
   width: 100%;
   max-width: 100%;
-  margin-top: 10px;
+  margin-top: 5px;
 `;
 
 export const Container = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
 `;
 
 export const GridItem = styled.div`
   width: 650px;
-  height: 450px;
+  height: 410px;
   background: #3A5BA2;
   color: #fff;
   font-weight: bold;
-  padding: 20px;
+  padding: 10px;
   margin: 10px;
   font-size: 18px;
   text-align: center;

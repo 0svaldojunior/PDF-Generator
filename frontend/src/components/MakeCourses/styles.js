@@ -7,7 +7,7 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 800px;
+  height: 750px;
   width: 100%;
 `;
 

@@ -284,11 +284,11 @@ function UserInformation() {
             <p>E-mail: {newMail} </p>
             <p>Senha: {newPassword} </p>
             <p>Tipo: {newUserType} </p>
+            <p>Confirme se os dados estão corretos, caso esteja clique em Criar.</p>
             <Row>
               <button onClick={fillNewUser} >Preencher</button>
               <button onClick={createNewUser} >Criar</button>
             </Row>
-            <p>Confirme se os dados estão corretos, caso esteja clique em Criar.</p>
           </GridItem2>
         </Container>
 

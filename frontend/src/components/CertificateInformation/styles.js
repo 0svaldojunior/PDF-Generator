@@ -7,7 +7,7 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 800px;
+  height: 750px;
   width: 100%;
 `;
 
@@ -88,7 +88,7 @@ export const Button2 = styled.button`
   border: 0;
   border-radius: 8px;
   margin-left: 25px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   color: #3A5BA2;
   background: rgba(0, 0, 0, 0);
   padding: 20px;

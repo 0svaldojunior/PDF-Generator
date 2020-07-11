@@ -1,4 +1,4 @@
-const coonection = require('../database/connection');
+const connection = require('../database/connection');
 
 module.exports = {
     // Aplicação de uma seleção completa das informações presente na tabela

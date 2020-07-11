@@ -33,6 +33,7 @@ function DashInformation() {
           }
          });
         setUser_id(response.data.filter(element => element.mail === localStorage.getItem('mail'))[0].user_id);
+        localStorage.setItem('user_id', response.data.filter(element => element.mail === localStorage.getItem('mail'))[0].user_id);
         setName(response.data.filter(element => element.mail === localStorage.getItem('mail'))[0].name);
         setPassword(response.data.filter(element => element.mail === localStorage.getItem('mail'))[0].password);
         var adm = 0, norm = 0;

@@ -7,10 +7,19 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
         <meta charset="utf-8">
         <title>PDF Result Template</title>
         <style>
+          @font-face {
+            font-family: 'DejaVuSerifCondensed';
+            src: url('./fonts/DejaVuSerifCondensed/DejaVuSerifCondensed.eot');
+            src: url('./fonts/DejaVuSerifCondensed/DejaVuSerifCondensed.woff') format('woff');
+            url('./fonts/DejaVuSerifCondensed/DejaVuSerifCondensed.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+          }
+
           h1 {
-            font-weigth: bold;
-            font-size: 45px;
+            font-family: DejaVuSerifCondensed;
             color: #000;
+            font-size: 45px;
           }
 
           h2 {
@@ -116,6 +125,27 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
             rigth: 2%;
             columns: 100px 3;
           }
+
+          .bg-image .certificate {
+            margin-top: 553px;
+            margin-left: 65%;
+            position: absolute;
+            font-size: 10px;
+          }
+
+          .bg-student .certificate {
+            margin-top: 553px;
+            margin-left: 65%;
+            position: absolute;
+            font-size: 10px;
+          }
+
+          .historic .certificate {
+            margin-top: 30px;
+            margin-left: 65%;
+            position: absolute;
+            font-size: 10px;
+          }
         </style>
       </head>
       <body>
@@ -130,6 +160,10 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
             <h4>recebendo a titulação de
             <h2>${titration}</h2>
             <h4>tendo alcançado excelente nivel de aproveitamento.</h4>
+          </div>
+
+          <div class="certificate">
+            <h5>Certificado emitido em conformidade com o Decreto Federal № 5.154/04</h5>
           </div>
 
           <div class="dateList">
@@ -156,9 +190,16 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
             </table>
             <h5>REGISTRO: ${registerNumber}</h5>
           </div>
+
+          <div class="certificate">
+            <h5>Certificado emitido em conformidade com o Decreto Federal № 5.154/04</h5>
+          </div>
         </div>
 
         <div class="historic">
+          <div class="certificate">
+            <h5><br>Certificado emitido em conformidade com o Decreto Federal № 5.154/04</h5>
+          </div>
           <h1><br>${thisCourse.name}</h1>
           <div class="studentInformation2">
             <table>
@@ -179,11 +220,11 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
               </tr>
             </table>
           </div>
-        <h5>HISTÓRICO DO CURSO</h5>
-        <H5>Foi Desenvolvido no Curso Livre de "${thisCourse.name}", o seguinte  conteúdo programático:</H5>
-        <div class="table-historic">
-          ${thisCourse.content}
-        </div>
+          <h5>HISTÓRICO DO CURSO</h5>
+          <H5>Foi Desenvolvido no Curso Livre de "${thisCourse.name}", o seguinte  conteúdo programático:</H5>
+          <div class="table-historic">
+            ${thisCourse.content}
+          </div>
         </div>
       </body>
     </html>

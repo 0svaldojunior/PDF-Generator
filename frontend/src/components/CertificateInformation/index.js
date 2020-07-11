@@ -4,7 +4,6 @@ import { saveAs } from 'file-saver';
 import { Container, Row2, Course, Box, Button2, ScrollContainer, GlobalContainer } from './styles';
 import TopButtons from '../TopButtons';
 import api from '../../services/api';
-import axios from 'axios';
 
 function CertificateInformation() {
 
@@ -27,10 +26,12 @@ function CertificateInformation() {
   const [signature, setSignature] = useState('');
   const [courses, setCourses] = useState([]);
   const [selectCourse, setSelectCourse] = useState('');
+  const [courseID, setCourseID] = useState(-1);
   const [thisCourse, setThisCourse] = useState({});
-  const local = axios.create({ baseURL: 'http://localhost:3001' });
 
   useEffect(() => {
+    setHistoric('');
+    setSignature('');
     async function loadCourses() {
       try {
         const response = await api.get('/courses');
@@ -48,33 +49,50 @@ function CertificateInformation() {
   };
 
   function createPDF() {
-    console.log(thisCourse);
-    console.log(titration);
-    const data = {
-      studentName,
-      studentCPF,
-      studentMail,
-      note,
-      registerNumber,
-      date,
-      verse,
-      historic,
-      seal,
-      titration,
-      signature,
-      thisCourse
-    };
-    api.post('/create-pdf', data)
-      .then(() => api.get('fetch-pdf', { responseType: 'blob' }))
-      .then((response) => {
-        const pdfBlob = new Blob([response.data], { type: 'applications/pdf' });
-        const fileName = `Certificado_${studentName}-${newDate.getTime()}.pdf`;
-        var data = new FormData();
+    if(selectCourse !== -1) {
+      if(courses.filter(course => course.name === selectCourse)[0] !== undefined) {
+        const data = {
+          studentName,
+          studentCPF,
+          studentMail,
+          note,
+          registerNumber,
+          date,
+          verse,
+          historic,
+          seal,
+          titration,
+          signature,
+          thisCourse,
+          courseID,
+          user_id: localStorage.getItem('user_id'),
+          secondsNow: newDate.getTime().toPrecision()
+        };
+        api.post('/create-pdf', data)
+          .then(() => api.get('fetch-pdf', { responseType: 'blob' }))
+          .then((response) => {
+            const pdfBlob = new Blob([response.data], { type: 'applications/pdf' });
+            const fileName = `Certificado-${studentName}-${newDate.getTime().toPrecision()}.pdf`;
 
-        saveAs(pdfBlob, fileName);
-        data.append('Certificado', pdfBlob, fileName);
-        local.post('pdf', data);
-      });
+            const certificateDate = {
+              url: fileName, 
+              titration, 
+              note: 0,
+              register_number: registerNumber, 
+              date: `${year}-${month}-${day}`, 
+              verse: verse === 'Completo' ? true : false,
+              historic: false,
+              signature: false,
+              author: localStorage.getItem('user_id'), 
+              course: courseID
+            };
+
+            api.post('/certificates', certificateDate);
+    
+            saveAs(pdfBlob, fileName);
+          });
+      }
+    }
   }
 
   return(
@@ -93,7 +111,12 @@ function CertificateInformation() {
               <input 
                 value={selectCourse}
                 onChange={event => {
-                  setThisCourse(courses.filter(course => course.name === event.target.value)[0]);
+                  if(courses.filter(course => course.name === event.target.value)[0] === undefined) {
+                    setCourseID(-1);
+                  } else {
+                    setCourseID(courses.filter(course => course.name === event.target.value)[0].course_id);
+                    setThisCourse(courses.filter(course => course.name === event.target.value)[0]);
+                  }
                   setSelectCourse(event.target.value);
                 }}
                 list="selectCourseList"
