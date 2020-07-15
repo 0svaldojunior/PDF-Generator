@@ -19,17 +19,17 @@ function TopButtons() {
         }
       }} />
 
-      <Buttons name="Digital" click={() => {
+      <Buttons name="Completos" click={() => {
         try {
-          return ( history.push('/certificates-digital') );
+          return ( history.push('/certificates-complete') );
         } catch (error) {
           alert('Falha ao trocar de página, verifique e tente novamente!');
         }
       }} />
 
-      <Buttons name="Impressos" click={() => {
+      <Buttons name="Simples" click={() => {
         try {
-          return ( history.push('/certificates-print') );
+          return ( history.push('/certificates-simple') );
         } catch (error) {
           alert('Falha ao trocar de página, verifique e tente novamente!');
         }

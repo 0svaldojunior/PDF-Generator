@@ -4,19 +4,19 @@ import GlobalStyles from '../../styles/global';
 import { Container } from './styles';
 
 import DashMenu from '../../components/DashMenu';
-import CertificateDigital from '../../components/CertificateDigital';
+import CertificateSimple from '../../components/CertificateSimple';
 
 
-class Digital extends Component {
+class Simple extends Component {
   render () {
     return(
       <Container>
         <DashMenu />
-        <CertificateDigital />
+        <CertificateSimple />
         <GlobalStyles />
       </Container>
     );
   }
 }
 
-export default Digital;
+export default Simple;

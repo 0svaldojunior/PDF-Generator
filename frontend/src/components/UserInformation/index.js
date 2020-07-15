@@ -67,6 +67,7 @@ function UserInformation() {
     } else {
       setUsers(users.filter(user => user.name.includes(content) ))
     }
+    // eslint-disable-next-line 
   }, [mail, content]);
   
   async function changeName(event, id) {

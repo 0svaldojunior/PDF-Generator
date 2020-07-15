@@ -1,5 +1,8 @@
 const { Router } = require('express');
 
+const multer = require('multer');
+const multerConfig = require('./config/multer');
+
 const CertificateController = require('./controllers/CertificateController');
 const CourseController = require('./controllers/CourseController');
 const StudentController = require('./controllers/StudentController');
@@ -37,8 +40,10 @@ routes.delete('/users', UserController.delete);
 
 routes.post('/send-mail', SendMailController.sendMail);
 
-routes.post('/create-pdf', PDFsController.post);
+routes.post('/create-pdf', multer(multerConfig).single('file'), PDFsController.post);
+routes.post('/create-pdfs', PDFsController.post);
 routes.get('/fetch-pdf', PDFsController.get);
+routes.get('/fetch-specific-pdf', PDFsController.idGet);
 
 routes.get('/search/certificate', SearchCertificateController.index);
 routes.get('/search/course', SearchCourseController.index);

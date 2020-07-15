@@ -19,12 +19,9 @@ function MakeCourses({ onSubmit }) {
   const [courseText, setCourseText] = useState('');
   const [mailText, setMailText] = useState('');
 
-  async function handleAddCourse(event) {
-    event.preventDefault();
-    try {
+  async function handleAddCourse() {
+    try {      
       alert('Parabéns, um novo curso foi cadastrado com SUCESSO!');
-      history.push('/courses-list');
-
       await api.post('/courses', {
         name: courseName,
         workload: courseWorkLoad,
@@ -38,6 +35,7 @@ function MakeCourses({ onSubmit }) {
     } catch (error) {
       alert('Erro ao cadastrar o curso, verifique e tente novamente');
     }
+    history.push('/courses-list');
   };
 
   const handleEditorChange1 = (content, editor) => {
@@ -113,46 +111,6 @@ function MakeCourses({ onSubmit }) {
               </Row2>
             </Box>
 
-            <Box>
-              <Row2 input={960} h2={180}>
-                <h2>Certificado com histórico? </h2>
-                <input 
-                  value={courseHistoric}
-                  onChange={event => setCourseHistoric(event.target.value)}
-                  list="listHistoric"
-                  type="search"
-                />
-                <datalist id="listHistoric">
-                  <option value="Sim" />
-                  <option value="Não" />
-                </datalist>
-              </Row2>
-            </Box>
-
-            <BoxEditor>
-              <h1>Conteúdo do Curso</h1>
-              <BoxText>
-                <Editor
-                  apiKey="890ni8z581yd741ma62cd27n50du17qvxffl6feajt67d0yq"
-                  initialValue={`<p>${courseText}</p>`}
-                  init={{
-                    height: 350,
-                    menubar: true,
-                    plugins: [
-                      'advlist autolink lists link image charmap print preview anchor',
-                      'searchreplace visualblocks code fullscreen',
-                      'insertdatetime media table paste code help wordcount'
-                    ],
-                    toolbar:
-                      'undo redo | formatselect | bold italic backcolor | \n' +
-                      'alignleft aligncenter alignright alignjustify | \n' +
-                      'bullist numlist outdent indent | removeformat | help'
-                  }}
-                  onEditorChange={handleEditorChange1}
-                />
-              </BoxText>
-            </BoxEditor>
-
             <BoxEditor>
               <h1>Conteúdo do E-mail</h1>
               <BoxText>
@@ -176,6 +134,48 @@ function MakeCourses({ onSubmit }) {
                   />
                 </BoxText>
             </BoxEditor>
+
+            <Box>
+              <Row2 input={960} h2={180}>
+                <h2>Certificado com histórico? </h2>
+                <input 
+                  value={courseHistoric}
+                  onChange={event => setCourseHistoric(event.target.value)}
+                  list="listHistoric"
+                  type="search"
+                />
+                <datalist id="listHistoric">
+                  <option value="Sim" />
+                  <option value="Não" />
+                </datalist>
+              </Row2>
+            </Box>
+
+            {courseHistoric === 'Sim' && 
+              <BoxEditor>
+                <h1>Conteúdo do Curso</h1>
+                <BoxText>
+                  <Editor
+                    apiKey="890ni8z581yd741ma62cd27n50du17qvxffl6feajt67d0yq"
+                    initialValue={`<p>${courseText}</p>`}
+                    init={{
+                      height: 350,
+                      menubar: true,
+                      plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                      ],
+                      toolbar:
+                        'undo redo | formatselect | bold italic backcolor | \n' +
+                        'alignleft aligncenter alignright alignjustify | \n' +
+                        'bullist numlist outdent indent | removeformat | help'
+                    }}
+                    onEditorChange={handleEditorChange1}
+                  />
+                </BoxText>
+              </BoxEditor>
+            }
 
             <button type="submit">Criar Curso</button>
             

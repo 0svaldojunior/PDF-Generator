@@ -10,19 +10,18 @@ module.exports = {
 
     // Através dos dados fornecidos no corpo da requisição, é feita a inserção na tabela mencionda
     async create(request, response) {
-        const { url, titration, note, register_number, date, verse, historic, signature, author, course } = request.body;
+        const { date, complet, send, seal, author, course, student_name, student_mail, url } = request.body;
 
         const certificate = await connection('certificates').insert({
-            url, 
-            titration, 
-            note, 
-            register_number, 
             date, 
-            verse, 
-            historic, 
-            signature, 
+            complet, 
+            send, 
+            seal, 
             author, 
-            course
+            course,
+            student_name,
+            student_mail,
+            url
         });
 
         return response.json({ certificate })

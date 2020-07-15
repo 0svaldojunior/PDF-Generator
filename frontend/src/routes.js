@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Switch  } from 'react-router-dom';
 import Logon from './pages/Logon';
 import Dashboard from './pages/Dashboard';
 import Certificates from './pages/Certificat';
-import CertificatesPrint from './pages/Print';
-import CertificatesDigital from './pages/Digital';
+import CertificatesComplete from './pages/Complete';
+import CertificatesSimple from './pages/Simple';
 import Courses from './pages/Courses';
 import ListCourses from './pages/ListCourses';
 import EditCourses from './pages/EditCourses';
@@ -22,8 +22,8 @@ export default function Routes() {
         <Route path = "/courses-list" component = { ListCourses } />
         <Route path = "/courses-edit" component = { EditCourses } />
         <Route path = "/certificates" component = { Certificates } />
-        <Route path = "/certificates-print" component = { CertificatesPrint } />
-        <Route path = "/certificates-digital" component = { CertificatesDigital } />
+        <Route path = "/certificates-complete" component = { CertificatesComplete } />
+        <Route path = "/certificates-simple" component = { CertificatesSimple } />
       </Switch>
     </BrowserRouter>
   );

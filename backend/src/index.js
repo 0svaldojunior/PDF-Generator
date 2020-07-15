@@ -1,4 +1,5 @@
-// Arquivo principal onde inicia o processo da aplicação
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -11,6 +12,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // informa que a aplicação irá "entender" o tipo json
 app.use(express.static('public')); 
 app.use(routes); // rotas criadas para manipular a database.
-
 
 app.listen(3000);

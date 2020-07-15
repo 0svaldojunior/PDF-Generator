@@ -52,6 +52,13 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
             font-wigth: bold;
             color: #1c1b1b;
           }
+
+          .bg-image .certificate {
+            margin-top: 553px;
+            margin-left: 65%;
+            position: absolute;
+            font-size: 10px;
+          }
         </style>
       </head>
       <body>
@@ -66,6 +73,10 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
             <h4>recebendo a titulação de
             <h2>${titration}</h2>
             <h4>tendo alcançado excelente nivel de aproveitamento.</h4>
+          </div>
+
+          <div class="certificate">
+            <h5>Certificado emitido em conformidade com o Decreto Federal № 5.154/04</h5>
           </div>
 
           <div class="dateList">

@@ -1,4 +1,4 @@
-const coonection = require('../database/connection');
+const connection = require('../database/connection');
 
 module.exports = {
     // Aplicação de uma seleção completa das informações presente na tabela
@@ -10,9 +10,10 @@ module.exports = {
 
     // Através dos dados fornecidos no corpo da requisição, é feita a inserção na tabela mencionda
     async create(request, response) {
-        const { name, cpf, mail } = request.body;
+        const { student_id, name, cpf, mail } = request.body;
 
         const student = await connection('students').insert({
+            student_id,
             name,
             cpf,
             mail,

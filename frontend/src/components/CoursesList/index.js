@@ -18,10 +18,12 @@ function CoursesList() {
       setCourses(response.data);
     };
 
-    if(content.length === 0) {
+    if(courses.length === 0) {
       loadCourses();
-    } else {
+    } else if(content.length > 0) {
       setCourses(courses.filter( course => course.name.includes(content) ));
+    } else {
+      loadCourses();
     }
   }, [content, courses.length]);
 

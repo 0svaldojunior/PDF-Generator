@@ -18,39 +18,72 @@ function CertificateInformation() {
   const [studentMail, setStudentMail] = useState('');
   const [note, setNote] = useState('');
   const [registerNumber, setRegisterNumber] = useState('P3V-NATH0X - Folha 89 do Livro número 03 do Registro de Certificados');
-  const [date, setDate] = useState(`${day} de ${extenseMonth} de ${year}`);
-  const [verse, setVerse] = useState('');
-  const [historic, setHistoric] = useState('');
+  const [date, setDate] = useState(`${day}-${extenseMonth}-${year}`);
+  const [complet, setComplet] = useState('');
+  const [send, setSend] = useState('');
   const [seal, setSeal] = useState('');
   const [titration, setTitration] = useState('');
   const [signature, setSignature] = useState('');
   const [courses, setCourses] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [students, setStudents] = useState([]);
   const [selectCourse, setSelectCourse] = useState('');
   const [courseID, setCourseID] = useState(-1);
   const [thisCourse, setThisCourse] = useState({});
 
   useEffect(() => {
-    setHistoric('');
+    setSend('');
     setSignature('');
-    async function loadCourses() {
+    async function load() {
       try {
         const response = await api.get('/courses');
         setCourses(response.data);
       } catch (error) {
-        alert(`Erro ao carregar conteudo: ${error}`)
+        alert(`Erro ao baixar dados:\n ${error}`)
       }
     };
 
-    loadCourses();
+    load();
   }, [selectCourse]);
+
+  useEffect(() => {
+    async function loadUsers() {
+      const response = await api.get('/users');
+      setUsers(response.data);
+    };
+
+    async function loadCourses() {
+      const response = await api.get('/courses');
+      setCourses(response.data);
+    };
+
+    async function loadStudents() {
+      const response = await api.get('/students');
+      setStudents(response.data);
+    };
+
+    loadUsers();
+    loadCourses();
+    loadStudents();
+  }, [users.length, courses.length, students.length]);
+
   
   const generaterKey = (prefix) => {
     return `${prefix}-${new Date().getTime()}`;
   };
 
-  function createPDF() {
+  async function createPDF() {
     if(selectCourse !== -1) {
       if(courses.filter(course => course.name === selectCourse)[0] !== undefined) {
+        alert('Um novo certificado foi gerado com sucesso!');
+        setTimeout(() => {
+          alert('A págira ira recarregar e você poderá vizualizar o resultado no menu suspenso "Completos".');
+          setTimeout(() => {
+            window.location.reload(false);
+          }, 3000);
+        }, 1000);
+
+
         const data = {
           studentName,
           studentCPF,
@@ -58,43 +91,24 @@ function CertificateInformation() {
           note,
           registerNumber,
           date,
-          verse,
-          historic,
+          complet,
+          send,
           seal,
           titration,
-          signature,
           thisCourse,
+          course: selectCourse,
           courseID,
-          user_id: localStorage.getItem('user_id'),
-          secondsNow: newDate.getTime().toPrecision()
+          pdfName: `Certificado-${studentName}.pdf`,
+          author: localStorage.getItem('user_name'),
         };
-        api.post('/create-pdf', data)
-          .then(() => api.get('fetch-pdf', { responseType: 'blob' }))
-          .then((response) => {
-            const pdfBlob = new Blob([response.data], { type: 'applications/pdf' });
-            const fileName = `Certificado-${studentName}-${newDate.getTime().toPrecision()}.pdf`;
-
-            const certificateDate = {
-              url: fileName, 
-              titration, 
-              note: 0,
-              register_number: registerNumber, 
-              date: `${year}-${month}-${day}`, 
-              verse: verse === 'Completo' ? true : false,
-              historic: false,
-              signature: false,
-              author: localStorage.getItem('user_id'), 
-              course: courseID
-            };
-
-            api.post('/certificates', certificateDate);
-    
-            saveAs(pdfBlob, fileName);
-          });
+        
+        const response = await api.post('/create-pdf', data);
+        console.log(response);
+        api.post('/certificates', response.data);
       }
     }
   }
-
+  
   return(
     <GlobalContainer>
       <TopButtons />
@@ -197,12 +211,12 @@ function CertificateInformation() {
             <Row2 input={940} h2={180}>
               <h2>Simples ou Completo?</h2>
               <input 
-                value={verse}
-                onChange={event => setVerse(event.target.value)}
-                list="verseList"
+                value={complet}
+                onChange={event => setComplet(event.target.value)}
+                list="completList"
                 type="search"
               />
-              <datalist id="verseList">
+              <datalist id="completList">
                 <option value="Simples" />
                 <option value="Completo" />
               </datalist>
@@ -235,11 +249,9 @@ function CertificateInformation() {
             </Row2>
           </Box>
           
-          {/* <a href={`mailto:${studentMail}?subject=${thisCourse.subject}&body=${thisCourse.mail_text}`} > */}
             <Button2 onClick={createPDF} >
               Gerar Certificado
             </Button2>
-          {/* </a> */}
         </Container>
       </ScrollContainer>
     </GlobalContainer>

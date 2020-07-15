@@ -22,7 +22,7 @@ export const GridContainer = styled.div`
 `;
 
 export const GridItem = styled.div`
-  height: 350px;
+  height: 400px;
   width: 650px;
   background: #3A5BA2;
   color: #fff;
@@ -72,5 +72,5 @@ export const Column = styled.div`
 `;
 
 export const Column2 = styled(Column)`
-  margin-top: 90px;
+  margin-top: 120px;
 `;

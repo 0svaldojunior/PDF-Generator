@@ -4,7 +4,7 @@ import GlobalStyles from '../../styles/global';
 import { Container } from './styles';
 
 import DashMenu from '../../components/DashMenu';
-import CertificatePrint from '../../components/CertificatePrint';
+import CertificateComplete from '../../components/CertificateComplete';
 
 
 class Print extends Component {
@@ -12,7 +12,7 @@ class Print extends Component {
     return(
       <Container>
         <DashMenu />
-        <CertificatePrint />
+        <CertificateComplete />
         <GlobalStyles />
       </Container>
     );
