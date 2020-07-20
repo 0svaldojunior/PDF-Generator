@@ -57,6 +57,7 @@ export const GridItem = styled.div`
     align-items: center;
     font-weight: bold;
     margin-left: 20px;
+    margin-top: 10px;
   }
 
   button:hover {
@@ -72,10 +73,10 @@ export const Column = styled.div`
 `;
 
 export const Column2 = styled(Column)`
-  margin-top: 80px;
+  margin-top: 60px;
 `;
 
 export const DivSearchBar = styled.div`
-  margin-left: 30px;
   margin-bottom: 10px;
+  margin-left: 30px;
 `;

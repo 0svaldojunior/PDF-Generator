@@ -35,13 +35,13 @@ function TopButtons() {
         }
       }} />
 
-      {/* <Buttons name="Emitidos" click={() => {
+      <Buttons name="Emitidos" click={() => {
         try {
           return ( history.push('/certificates-issued') );
         } catch (error) {
           alert('Falha ao trocar de página, verifique e tente novamente!');
         }
-      }} /> */}
+      }} />
     </Container>
   );
 }

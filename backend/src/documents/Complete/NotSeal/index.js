@@ -25,13 +25,17 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
           h2 {
             font-weigth: bold;
             font-size: 30px;
-            color: #1c1b1b;
+            color: #293770;
           }
 
           h4 {
             font-weigth: bold;
             font-size: 15px;
             color: #595959;
+          }
+
+          u {
+            color: #293770
           }
 
           table {
@@ -47,7 +51,7 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
           }
 
           .bg-image {
-            background-image: url('http://localhost:3001/img/certificate/BG-NotSealMaster.png');
+            background-image: url('https://vision-certificates.s3-sa-east-1.amazonaws.com/certificate/BG-NotSealMaster.png');
             background-color: #cccccc;
             height: 575px;
             background-position: center;
@@ -75,7 +79,7 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
           }
 
           .bg-student {
-            background-image: url('http://localhost:3001/img/certificate/BG-Student.png');
+            background-image: url('https://vision-certificates.s3-sa-east-1.amazonaws.com/certificate/BG-Student.png');
             background-color: #cccccc;
             height: 575px;
             background-position: center;
@@ -112,7 +116,7 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
           }
 
           .table-historic {
-            background-image: url('http://localhost:3001/img/certificate/BG-Historic.png');
+            background-image: url('https://vision-certificates.s3-sa-east-1.amazonaws.com/certificate/BG-Historic.png');
             background-color: #cccccc;
             height: 305px;
             width: 820px;

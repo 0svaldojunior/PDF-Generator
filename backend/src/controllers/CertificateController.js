@@ -23,8 +23,19 @@ module.exports = {
             student_mail,
             url
         });
-
+        
         return response.json({ certificate })
+    },
+
+    async sended(request, response) {
+        const { certificate_id } = request.body;
+        
+        const certificate = await connection('certificates')
+          .where('certificate_id', certificate_id)
+          .update({ send: true });
+        
+        console.log(certificate);
+        return response.json(certificate);
     },
 
     // Com os parâmetros fornecidos na query da requisição(tool_id) foi possivel aplicar o filtro e
@@ -43,6 +54,6 @@ module.exports = {
 
         const deleteCertificate = await connection('certificates').where('certificate_id', certificate_id).del();
 
-        return response.status(204).send().json(deleteCertificate);
+        return response.json(deleteCertificate);
     },
 };

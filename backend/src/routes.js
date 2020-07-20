@@ -20,6 +20,7 @@ const routes = Router();
 routes.get('/certificates', CertificateController.index);
 routes.post('/certificates', CertificateController.create);
 routes.delete('/certificates', CertificateController.delete);
+routes.put('/certificates/update', CertificateController.sended);
 
 routes.get('/courses', CourseController.index);
 routes.post('/courses', CourseController.create);

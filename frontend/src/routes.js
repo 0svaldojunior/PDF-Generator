@@ -6,10 +6,12 @@ import Dashboard from './pages/Dashboard';
 import Certificates from './pages/Certificat';
 import CertificatesComplete from './pages/Complete';
 import CertificatesSimple from './pages/Simple';
+import CertificatesIssued from './pages/Issued';
 import Courses from './pages/Courses';
 import ListCourses from './pages/ListCourses';
 import EditCourses from './pages/EditCourses';
 import Users from './pages/Users';
+import DashNormal from './pages/DashboardNormalUser'
 
 export default function Routes() {
   return(
@@ -17,6 +19,7 @@ export default function Routes() {
       <Switch>
         <Route path = "/" exact component = { Logon } />
         <Route path = "/dashboard" component = { Dashboard } />
+        <Route path = "/dashboard-normal-user" component = { DashNormal } />
         <Route path = "/users" component = { Users } />
         <Route path = "/courses" component = { Courses } />
         <Route path = "/courses-list" component = { ListCourses } />
@@ -24,6 +27,7 @@ export default function Routes() {
         <Route path = "/certificates" component = { Certificates } />
         <Route path = "/certificates-complete" component = { CertificatesComplete } />
         <Route path = "/certificates-simple" component = { CertificatesSimple } />
+        <Route path = "/certificates-issued" component = { CertificatesIssued } />
       </Switch>
     </BrowserRouter>
   );

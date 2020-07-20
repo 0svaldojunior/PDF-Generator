@@ -1,8 +1,8 @@
 {
-  "name": "V4Company",
+  "name": "PDF-Generator",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/0svaldojunior/V4Company.git",
+  "repository": "https://github.com/0svaldojunior/PDF-Genetator.git",
   "author": "0svaldojunior <osvaldo.rodrigues@acad.pucrs.br>",
   "license": "MIT",
   "scripts": {

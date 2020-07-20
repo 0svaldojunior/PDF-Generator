@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  height: 100%;
+  max-width: 1600px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  height: 120px;
-  width: 650px;
-  margin-left: 220px;
 `;

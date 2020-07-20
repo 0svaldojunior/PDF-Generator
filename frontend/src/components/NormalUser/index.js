@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Container, Row2, Course, Box, Button2, ScrollContainer, GlobalContainer } from './styles';
-import TopButtons from '../TopButtons';
+import { Container, Row2, Course, Box, Button2, ScrollContainer, GlobalContainer, GridItem, LogOutButton } from './styles';
 import api from '../../services/api';
 
-function CertificateInformation() {
+import { MdEdit } from 'react-icons/md';
 
+function CertificateInformation() {
+  const history = useHistory();
   const newDate =  new Date();
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
   const day = newDate.getDate();
   const extenseMonth = 1 === month ? 'Janeiro' : 2 === month ? 'Fevereiro'  : 3 === month ? 'Março'  : 4 === month ? 'Abril'  : 5 === month ? 'Maio'  : 6 === month ? 'Junho'  : 7 === month ? 'Julho'  : 8 === month ? 'Agosto'  : 9 === month ? 'Setembro'  : 10 === month ? 'Outubro'  : 11 === month ? 'Novembro' : 'Dezembro';
   
+  const [user_id, setUser_id] = useState('');
+  const [name, setName] = useState('');
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
   const [studentName, setStudentName] = useState('');
   const [studentCPF, setStudentCPF] = useState('');
   const [studentMail, setStudentMail] = useState('');
@@ -31,8 +36,28 @@ function CertificateInformation() {
   const [courseID, setCourseID] = useState(-1);
   const [thisCourse, setThisCourse] = useState({});
 
-  const history = useHistory();
-
+  useEffect(() => {
+    setMail(localStorage.getItem('mail'));
+    async function loadUser() {
+      try {
+        const response = await api.get(`/users?mail=${localStorage.getItem('mail')}`, { 
+          query: {
+            data: {
+              mail
+            }
+          }
+         });
+        setUser_id(response.data.filter(element => element.mail === localStorage.getItem('mail'))[0].user_id);
+        localStorage.setItem('user_name', response.data.filter(element => element.mail === localStorage.getItem('mail'))[0].name);
+        setName(response.data.filter(element => element.mail === localStorage.getItem('mail'))[0].name);
+        setPassword(response.data.filter(element => element.mail === localStorage.getItem('mail'))[0].password);
+      } catch (err) {
+        alert(`Falha ao carregar dados, tente novamente. ${err}`);
+      }
+    };
+    loadUser();
+  }, [mail]);
+  
   useEffect(() => {
     setSend('');
     setSignature('');
@@ -78,14 +103,7 @@ function CertificateInformation() {
     if(selectCourse !== -1) {
       if(courses.filter(course => course.name === selectCourse)[0] !== undefined) {
         alert('Um novo certificado foi gerado com sucesso!');
-        setTimeout(() => {
-          alert('Aguarde o certificado ser gerado e você será redirecionado para vizualizar o resultado!.');
-          setTimeout(() => {
-            history.push('/certificates-issued');
-          }, 4000);
-        }, 1000);
-
-
+        alert('Avise um usuário administrativo para verificar e enviar o e-mail.');
         const data = {
           studentName,
           studentCPF,
@@ -109,11 +127,67 @@ function CertificateInformation() {
         api.post('/certificates', response.data);
       }
     }
-  }
+  };
+
+  async function changeName(event) {
+    event.preventDefault();
+    var person = prompt(`Nome atual: ${name} | Informe o novo:`);
+    if (person === null || person === "") {
+      window.alert( "Você cancelou a operação." );
+    } else {
+      try {
+        const data = {
+          user_id,
+          column: 'name', 
+          data: person
+        };
+        await api.put(`/users/update`, data);
+        window.alert( "Alteração realizada com sucesso!" );
+        window.location.reload(false);
+      } catch (error) {
+        alert('Falha ao alterar os dados, verifique e tente novamente.');
+      }
+    }
+  };
+
+  async function changePassword() {
+    var person = prompt(`Senha tual: ${password} | Informe a nova:`);
+    if (person === null || person === "") {
+      window.alert( "Você cancelou a operação." );
+    } else {
+      try {
+        const data = {
+          user_id,
+          column: 'password', 
+          data: person
+        };
+        await api.put(`/users/update`, data);
+        window.alert( "Alteração realizada com sucesso!" );
+        window.location.reload(false);
+      } catch (error) {
+        alert('Falha ao alterar os dados, verifique e tente novamente.');
+      }
+    }
+  };
+
+  function PushRoot() {
+    try {
+      localStorage.clear();
+      history.push('/');
+    } catch (error) {
+      alert('Falha ao trocar de página, verifique e tente novamente!');
+    }
+  };
   
   return(
     <GlobalContainer>
-      <TopButtons />
+      <GridItem> 
+        <h1>Perfil do Usuário</h1>
+        <p>{name} <button onClick={changeName}> <MdEdit /> </button> </p>
+        <p>{mail} </p>
+        <p>****** <button onClick={changePassword}> <MdEdit /> </button> </p>
+        <LogOutButton onClick={PushRoot} >SAIR</LogOutButton>
+      </GridItem>
       
       <ScrollContainer>
         <Container>

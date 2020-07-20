@@ -3,36 +3,29 @@ const nodemailer = require('nodemailer');
 
 module.exports ={
   async sendMail(request, response) {
-    const { to, subject, text, filename, path } = request.body;
+    const { to, subject, text } = request.body;
 
     var transporter = nodemailer.createTransport({
-      host: '',
-      service: '',
-      port: 587,
-      secure: true,
+      service: process.env.SERVICE_MAIL,
       auth:{
-        user: process.env.MAIL,
-        pass: process.env.PASSWORD
+        user: process.env.USER_MAIL,
+        pass: process.env.PASSWORD_MAIL
       }
     });
     
-    var mail = {
-      from: process.env.MAIL,
+    var mailOptions = {
+      from: process.env.USER_MAIL,
       to,
       subject,
-      text,
-      attachments: [
-        {
-          filename,
-          path,
-        }
-      ]
+      html: text,
+      
     };
-    
-    transporter.sendMail(mail, (error) => {
-      if(error) {
-        console.log(error);
-      }
+    transporter.sendMail(mailOptions, (error, info) => {
+    if(error) {
+      console.log(error);
+    } else {
+      console.log(`Email send:\n ${info.response}`);
+    }
     });
     
   }

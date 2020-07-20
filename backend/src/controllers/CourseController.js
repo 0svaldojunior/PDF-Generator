@@ -61,6 +61,6 @@ module.exports = {
 
         const deleteCourse = await connection('courses').where('course_id', course_id).del();
 
-        return response.status(204).send().json(deleteCourse);
+        return response.json(deleteCourse);
     },
 };

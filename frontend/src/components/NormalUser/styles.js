@@ -3,6 +3,50 @@ import styled from 'styled-components';
 export const GlobalContainer = styled.div`
   width: 100%;
   height: 100%;
+  margin-left: 120px;
+`;
+
+export const GridItem = styled.div`
+  width: 100%;
+  background: #3A5BA2;
+  color: #fff;
+  font-weight: bold;
+  padding: 20px;
+  margin: 10px;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+
+  &:hover {
+    background: #4c79d3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 1.19);
+  }
+
+  h1 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 38px;
+  }
+
+  p {
+    margin-top:34px;
+    margin-bottom: 25px;
+    margin-left: 50px;
+    font-size: 23px;
+  }
+
+  button {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+  }
+
 `;
 
 export const ScrollContainer = styled.div`
@@ -99,11 +143,25 @@ export const Button2 = styled.button`
   font-size: 40px;
   font-weight: bold;
   height: 250px;
-  width: 1200px;
+  width: 100%;
   height: 90px;
 
   &:hover {
     color:#fff;
     background: #4c79d3;
+  }
+`;
+
+export const LogOutButton = styled(Button2)`
+  font-size: 23px;
+  margin-top: 12px;
+  width: 100px;
+  height: 80px;
+
+  &:hover {
+    color:#4c79d3;
+    background: #fff;
+    width: 100px;
+    height: 60px;
   }
 `;

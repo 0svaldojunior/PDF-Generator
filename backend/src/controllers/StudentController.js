@@ -38,6 +38,6 @@ module.exports = {
 
         const deleteStudent = await connection('students').where('student_id', student_id).del();
 
-        return response.status(204).send().json(deleteStudent);
+        return response.json(deleteStudent);
     },
 };

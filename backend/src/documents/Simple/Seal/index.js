@@ -16,7 +16,7 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
           h2 {
             font-weigth: bold;
             font-size: 30px;
-            color: #1c1b1b;
+            color: #293770;
           }
 
           h4 {
@@ -25,10 +25,14 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
             color: #595959;
           }
 
+          u {
+            color: #293770
+          }
+
           .bg-image {
-            background-image: url('http://localhost:3001/img/certificate/BG-SealMaster.png');
+            background-image: url('https://vision-certificates.s3-sa-east-1.amazonaws.com/certificate/BG-SealMaster.png');
             background-color: #cccccc;
-            height: 575px;
+            height: 570px;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -54,7 +58,7 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
           }
 
           .bg-image .certificate {
-            margin-top: 553px;
+            margin-top: 550px;
             margin-left: 65%;
             position: absolute;
             font-size: 10px;

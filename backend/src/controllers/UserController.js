@@ -89,6 +89,6 @@ module.exports = {
 
     const deleteUser = await connection('users').where('user_id', user_id).del();
 
-    return response.status(204).send().json(deleteUser);
+    return response.json(deleteUser);
   },
 };

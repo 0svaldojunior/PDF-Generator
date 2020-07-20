@@ -24,7 +24,7 @@ function CoursesList() {
       setCourses(courses.filter( course => course.name.includes(content) ));
     } else {
       loadCourses();
-    }
+    } // eslint-disable-next-line
   }, [content, courses.length]);
 
   const generaterKey = (prefix) => {

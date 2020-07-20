@@ -5,9 +5,9 @@ import { GlobalContainer, ScrollContainer, GridContainer, GridItem, Column, Colu
 
 import TopButtons from '../TopButtons';
 import api from '../../services/api';
-
 import SearchBar from '../../components/SearchBar';
-function CertificateComplete() {
+
+function CertificateIssued() {
   const [certificates, setCertificates] = useState([]);
   const [courses, setCourses] = useState([]);
   const [content, setContent] = useState('');
@@ -19,7 +19,7 @@ function CertificateComplete() {
           certificate.student_name.includes(content) ||
           certificate.author.includes(content) ||
           certificate.course.includes(content) ||
-          certificate.date.includes(content)));    
+          certificate.date.includes(content)));  
       } else {
         const response = await api.get('/certificates');
         setCertificates(response.data);
@@ -36,8 +36,9 @@ function CertificateComplete() {
   const generaterKey = (prefix) => {
     return `${prefix}-${new Date().getTime()}`;
   };
-
-  async function sendMail(to, courseName, url, certificate_id) {
+  
+  function sendMail(to, courseName, url, certificate_id) {
+    alert('ENVIO realizado com sucesso!');
     const urlCertificate = `<br><br><br> <p>Para visualizar e baixar seu certificado, <a href=${url} target='_blank' >CLICK AQUI</a> </p>`;
     const subject = courses.filter(course => course.name === courseName)[0].subject;
     const text = courses.filter(course => course.name === courseName)[0].mail_text + urlCertificate;
@@ -47,8 +48,10 @@ function CertificateComplete() {
       subject: subject,
       text: text
     };
-    await api.post('/send-mail', data);
-  }
+    api.post('/send-mail', data); 
+    api.put('/certificates/update', { certificate_id });
+    window.location.reload(false);
+  };
 
   async function handleDeleteCertificate(id) {
     alert('Remoção realizada com SUCESSO!');
@@ -62,7 +65,7 @@ function CertificateComplete() {
     } catch (error) {
       alert('Erro ao deletar a ferramenta, verifique e tente novamente');
     }
-  }
+  };
   
   return(
     <GlobalContainer>
@@ -70,10 +73,11 @@ function CertificateComplete() {
       <DivSearchBar>
         <SearchBar content={content} setContent={setContent} />
       </DivSearchBar>
+      
       <ScrollContainer>
         <GridContainer>
           {
-            certificates.filter(certificate => certificate.complet === true && certificate.send === true).map(certificate => (
+            certificates.filter(certificate => certificate.send === false).map(certificate => (
               <GridItem key={generaterKey(certificate.certificate_id)} >
                 <Column>
                   <h1>Aluno: {certificate.student_name} </h1>
@@ -83,7 +87,7 @@ function CertificateComplete() {
                   <h1>Emissor: {certificate.author} </h1>
                 </Column>
                 
-                <Column2> 
+                <Column2>
                   <a href={certificate.url} target='_blank' >
                     <button>Visualizar</button>
                   </a>
@@ -92,7 +96,7 @@ function CertificateComplete() {
                     <button onClick={() => { 
                       sendMail(certificate.student_mail, certificate.course, certificate.url, certificate.certificate_id) 
                     }}>
-                      Re-Enviar
+                      Enviar
                     </button>
                   </a>
 
@@ -109,4 +113,4 @@ function CertificateComplete() {
   );
 }
 
-export default CertificateComplete;
+export default CertificateIssued;

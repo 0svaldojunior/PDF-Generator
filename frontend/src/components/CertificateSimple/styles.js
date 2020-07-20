@@ -7,7 +7,7 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 750px;
+  height: 650px;
   width: 100%;
 `;
 
@@ -72,5 +72,10 @@ export const Column = styled.div`
 `;
 
 export const Column2 = styled(Column)`
-  margin-top: 120px;
+  margin-top: 80px;
+`;
+
+export const DivSearchBar = styled.div`
+  margin-bottom: 10px;
+  margin-left: 30px;
 `;
