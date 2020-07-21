@@ -6,7 +6,10 @@ module.exports ={
     const { to, subject, text } = request.body;
 
     var transporter = nodemailer.createTransport({
-      service: process.env.SERVICE_MAIL,
+      pool: true,
+      host: process.env.SERVICE_MAIL,
+      port: 465,
+      secure: true,
       auth:{
         user: process.env.USER_MAIL,
         pass: process.env.PASSWORD_MAIL

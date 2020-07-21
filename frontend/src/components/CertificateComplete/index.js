@@ -90,6 +90,7 @@ function CertificateComplete() {
 
                   <a>
                     <button onClick={() => { 
+                      alert('Re-envio realizado com sucesso!');
                       sendMail(certificate.student_mail, certificate.course, certificate.url, certificate.certificate_id) 
                     }}>
                       Re-Enviar
