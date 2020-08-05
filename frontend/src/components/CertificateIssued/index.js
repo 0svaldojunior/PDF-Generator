@@ -5,6 +5,7 @@ import { GlobalContainer, ScrollContainer, GridContainer, GridItem, Column, Colu
 
 import TopButtons from '../TopButtons';
 import api from '../../services/api';
+import Email from '../Email';
 import SearchBar from '../../components/SearchBar';
 
 function CertificateIssued() {
@@ -39,7 +40,7 @@ function CertificateIssued() {
   
   function sendMail(to, courseName, url, certificate_id) {
     alert('ENVIO realizado com sucesso!');
-    const urlCertificate = `<br><br><br> <p>Para visualizar e baixar seu certificado, <a href=${url} target='_blank' >CLICK AQUI</a> </p>`;
+    const urlCertificate = Email(courseName, url);
     const subject = courses.filter(course => course.name === courseName)[0].subject;
     const text = courses.filter(course => course.name === courseName)[0].mail_text + urlCertificate;
     

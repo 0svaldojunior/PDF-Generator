@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 
-import { GlobalContainer, ScrollContainer, GridContainer, GridItem, Column, Column2, DivSearchBar } from './styles';
+import { GlobalContainer, ScrollContainer, GridContainer, GridItem, Column, DivSearchBar } from './styles';
 
 import TopButtons from '../TopButtons';
 import api from '../../services/api';
-import SearchBar from '../../components/SearchBar';
-import Email from '../Email';
 
-function CertificateComplete() {
+import SearchBar from '../SearchBar';
+function CertificateOld() {
   const [certificates, setCertificates] = useState([]);
   const [courses, setCourses] = useState([]);
   const [content, setContent] = useState('');
@@ -20,7 +19,7 @@ function CertificateComplete() {
           certificate.student_name.includes(content) ||
           certificate.author.includes(content) ||
           certificate.course.includes(content) ||
-          certificate.date.includes(content)));  
+          certificate.date.includes(content)));    
       } else {
         const response = await api.get('/certificates');
         setCertificates(response.data);
@@ -39,7 +38,7 @@ function CertificateComplete() {
   };
 
   async function sendMail(to, courseName, url, certificate_id) {
-    const urlCertificate = Email(courseName, url);
+    const urlCertificate = `<br><br><br> <p>Para visualizar e baixar seu certificado, <a href=${url} target='_blank' >CLICK AQUI</a> </p>`;
     const subject = courses.filter(course => course.name === courseName)[0].subject;
     const text = courses.filter(course => course.name === courseName)[0].mail_text + urlCertificate;
     
@@ -63,7 +62,7 @@ function CertificateComplete() {
     } catch (error) {
       alert('Erro ao deletar a ferramenta, verifique e tente novamente');
     }
-  };
+  }
   
   return(
     <GlobalContainer>
@@ -71,38 +70,18 @@ function CertificateComplete() {
       <DivSearchBar>
         <SearchBar content={content} setContent={setContent} />
       </DivSearchBar>
-
       <ScrollContainer>
         <GridContainer>
           {
-            certificates.filter(certificate => certificate.complet === false && certificate.send === true).map(certificate => (
+            certificates.filter(certificate => certificate.complet === true && certificate.send === true).map(certificate => (
               <GridItem key={generaterKey(certificate.certificate_id)} >
                 <Column>
                   <h1>Aluno: {certificate.student_name} </h1>
-                  <h1>E-mail: {certificate.student_mail} </h1>
-                  <h1>Curso: {certificate.course} </h1>
                   <h1>Data: {certificate.date} </h1>
-                  <h1>Emissor: {certificate.author} </h1>
-                </Column>
-                
-                <Column2>
                   <a href={certificate.url} target='_blank' >
                     <button>Visualizar</button>
                   </a>
-
-                  <a>
-                    <button onClick={() => { 
-                      alert('Re-envio realizado com sucesso!');
-                      sendMail(certificate.student_mail, certificate.course, certificate.url, certificate.certificate_id) 
-                    }}>
-                      Re-Enviar
-                    </button>
-                  </a>
-
-                  <a>
-                    <button onClick={() => { handleDeleteCertificate(certificate.certificate_id) }} >Deletar</button>
-                  </a>
-                </Column2>
+                </Column>
               </GridItem>
             ))
           }
@@ -112,4 +91,4 @@ function CertificateComplete() {
   );
 }
 
-export default CertificateComplete;
+export default CertificateOld;

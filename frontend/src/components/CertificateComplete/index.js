@@ -7,6 +7,8 @@ import TopButtons from '../TopButtons';
 import api from '../../services/api';
 
 import SearchBar from '../../components/SearchBar';
+import Email from '../Email';
+
 function CertificateComplete() {
   const [certificates, setCertificates] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -38,7 +40,7 @@ function CertificateComplete() {
   };
 
   async function sendMail(to, courseName, url, certificate_id) {
-    const urlCertificate = `<br><br><br> <p>Para visualizar e baixar seu certificado, <a href=${url} target='_blank' >CLICK AQUI</a> </p>`;
+    const urlCertificate = Email(courseName, url);
     const subject = courses.filter(course => course.name === courseName)[0].subject;
     const text = courses.filter(course => course.name === courseName)[0].mail_text + urlCertificate;
     

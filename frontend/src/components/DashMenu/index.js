@@ -75,7 +75,6 @@ function DashMenu() {
          <TiDocumentText height="20" /> Cursos
       </ButtonContainer>
 
-
       <ButtonGetOutContainer onClick={PushRoot}>
         <AiOutlineLogout height="20" /> Deslogar-se
       </ButtonGetOutContainer>

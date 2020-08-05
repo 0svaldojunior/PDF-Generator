@@ -18,6 +18,11 @@ function DashInformation() {
   const [allCourses, setAllCourses] = useState(0);
   const [coursesWithHistoric, setCoursesWithHistoric] = useState(0);
   const [coursesNotWithHistoric, setCoursesNotWithHistoric] = useState(0);
+  const [certificates, setCertificates] = useState([]);
+  const [numCertificatesIssued, setNumCertificatesIssued] = useState(0);
+  const [numCertificatesComplete, setNumCertificatesComplete] = useState(0);
+  const [numCertificatesSimple, setNumCertificatesSimple] = useState(0);
+  const [numCertificatesWithSeal, setNumCertificatesWithSeal] = useState(0);
 
   const history = useHistory();
 
@@ -65,10 +70,28 @@ function DashInformation() {
       } catch (error) {
         alert(`Falha ao carregar dados, tente novamente. ${error}`);
       }
-    }
+    };
+
     loadUser();
     loadCourses();
   }, [mail]); 
+
+  useEffect(() => {
+    async function loadCerfiticates() {
+      try {
+        const response = await api.get('/certificates');
+        setCertificates(response.data);
+      } catch (error) {
+        alert(`Falha ao carregar dados, tente novamente. ${error}`);
+      }
+    };
+
+    loadCerfiticates();
+    setNumCertificatesIssued(certificates.filter(certificate => certificate.send === false).length);
+    setNumCertificatesComplete(certificates.filter(certificate => certificate.complet === true && certificate.send === true).length);
+    setNumCertificatesSimple(certificates.filter(certificate => certificate.complet === false && certificate.send === true).length);
+    setNumCertificatesWithSeal(certificates.filter(certificate => certificate.seal === true).length);
+  }, [certificates]);
 
   async function changeName(event) {
     event.preventDefault();
@@ -133,9 +156,9 @@ function DashInformation() {
     }
   };
 
-  function PushCertificates() {
+  function PushCertificates(to) {
     try {
-      return ( history.push('/certificates') );
+      return ( history.push(`/${to}`) );
     } catch (error) {
       alert('Falha ao trocar de página, verifique e tente novamente!');
     }
@@ -167,10 +190,23 @@ function DashInformation() {
       </GridItem>
 
       <GridItem>
-        <h1>Informações dos Certificados</h1>
-        <p>Emitidos: 200 <button onClick={PushCertificates}> <TiLink /> </button> </p>
-        <p>Enviados: 120 <button onClick={PushCertificates}> <TiLink /> </button> </p>
-        <p>Impressos: 80 <button onClick={PushCertificates}> <TiLink /> </button> </p>
+        <h1>Informações dos Certificados: {certificates.length} </h1>
+        <p>
+          Emitidos: {numCertificatesIssued} 
+          <button onClick={() => PushCertificates('certificates-issued')}> <TiLink /> </button> 
+        </p>
+
+        <p>
+          Completos: {numCertificatesComplete} 
+          <button onClick={() => PushCertificates('certificates-complete')}> <TiLink /> </button> 
+        </p>
+
+        <p>
+          Simples: {numCertificatesSimple} 
+          <button onClick={() => PushCertificates('certificates-simple')}> <TiLink /> </button>
+        </p>
+
+        <p>Com Selo: {numCertificatesWithSeal}</p>
       </GridItem>
 
       <GridItem>

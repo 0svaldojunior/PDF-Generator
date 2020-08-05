@@ -7,6 +7,7 @@ import Certificates from './pages/Certificat';
 import CertificatesComplete from './pages/Complete';
 import CertificatesSimple from './pages/Simple';
 import CertificatesIssued from './pages/Issued';
+import OldCertificates from './pages/OldCertificates';
 import Courses from './pages/Courses';
 import ListCourses from './pages/ListCourses';
 import EditCourses from './pages/EditCourses';
@@ -28,6 +29,7 @@ export default function Routes() {
         <Route path = "/certificates-complete" component = { CertificatesComplete } />
         <Route path = "/certificates-simple" component = { CertificatesSimple } />
         <Route path = "/certificates-issued" component = { CertificatesIssued } />
+        <Route path = "/old-certificates" component = { OldCertificates } />
       </Switch>
     </BrowserRouter>
   );
