@@ -13,7 +13,7 @@ function MakeCourses({ onSubmit }) {
   const [courseName, setCourseName] = useState('');
   const [courseWorkLoad, setCourseWorkLoad] = useState('');
   const [courseAssuntMail, setCourseAssuntMail] = useState('');
-  const [courseRegisterNumber, setCourseRegisterNumber] = useState('');
+  const [courseRegisterNumber, setCourseRegisterNumber] = useState('P3V-NATH0X - Folha 89 do Livro número 03 do Registro de Certificados');
   const [courseVerse, setCourseVerse] = useState('');
   const [courseHistoric, setCourseHistoric] = useState('');
   const [courseText, setCourseText] = useState('');

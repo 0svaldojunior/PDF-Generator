@@ -35,6 +35,14 @@ function TopButtons() {
         }
       }} />
 
+      <Buttons name="Impressos" click={() => {
+        try {
+          return ( history.push('/certificates-print') );
+        } catch (error) {
+          alert('Falha ao trocar de página, verifique e tente novamente!');
+        }
+      }} />
+
       <Buttons name="Emitidos" click={() => {
         try {
           return ( history.push('/certificates-issued') );
@@ -42,14 +50,6 @@ function TopButtons() {
           alert('Falha ao trocar de página, verifique e tente novamente!');
         }
       }} />
-
-      {/* <Buttons name="Antigos" click={() => {
-        try {
-          return ( history.push('/old-certificates') );
-        } catch (error) {
-          alert('Falha ao trocar de página, verifique e tente novamente!');
-        }
-      }} /> */}
     </Container>
   );
 }

@@ -12,6 +12,10 @@ export const ScrollContainer = styled.div`
   width: 100%;
   max-width: 1380px;
   margin-top: 10px;
+
+  @media (max-width: 1300px) {
+    height: 670px;
+  }
 `;
 
 export const GridContainer = styled.div`
@@ -36,6 +40,10 @@ export const GridItem = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: row;
+
+  @media (max-width: 1300px) {
+    height: 650px;
+  }
 
   &:hover {
     background: #4c79d3;
@@ -78,4 +86,7 @@ export const Column2 = styled(Column)`
   margin-top: 180px;
   margin-left: 300px;
 
+  @media (max-width: 1300px) {
+    margin-top: 250px;
+  }
 `;

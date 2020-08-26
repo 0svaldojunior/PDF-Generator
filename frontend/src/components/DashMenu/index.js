@@ -76,7 +76,7 @@ function DashMenu() {
       </ButtonContainer>
 
       <ButtonGetOutContainer onClick={PushRoot}>
-        <AiOutlineLogout height="20" /> Deslogar-se
+        <AiOutlineLogout height="20" /> Sair
       </ButtonGetOutContainer>
 
 

@@ -25,8 +25,8 @@ function CoursesEdit({ onSubmit }) {
     setCourseWorkLoad(course.state.course.workload);
     setCourseAssuntMail(course.state.course.subject);
     setCourseRegisterNumber(course.state.course.register_number);
-    setCourseVerse(course.state.course.verse);
-    setCourseHistoric(course.state.course.historic);
+    setCourseVerse(course.state.course.verse === true ? 'Sim' : 'Não');
+    setCourseHistoric(course.state.course.historic === true ? 'Sim' : 'Não');
     setCourseText(course.state.course.content);
     setMailText(course.state.course.mail_text);
   }, [course]);
@@ -72,7 +72,7 @@ function CoursesEdit({ onSubmit }) {
         <form onSubmit={handleChangeCourse}>
           <Container>
             <Box>
-              <Row2 input={960} h2={180}>
+              <Row2 input={880} h2={200}>
                 <h2>Nome do curso: </h2>
                 <input 
                   value={courseName}
@@ -82,7 +82,7 @@ function CoursesEdit({ onSubmit }) {
             </Box>
 
             <Box>
-              <Row2 input={960} h2={180}>
+              <Row2 input={880} h2={200}>
                 <h2>Carga horária: </h2>
                 <input 
                   value={courseWorkLoad}
@@ -92,7 +92,7 @@ function CoursesEdit({ onSubmit }) {
             </Box>
 
             <Box>
-              <Row2 input={960} h2={180}>
+              <Row2 input={880} h2={200}>
                 <h2>Assunto do E-mail: </h2>
                 <input 
                   value={courseAssuntMail}
@@ -102,7 +102,7 @@ function CoursesEdit({ onSubmit }) {
             </Box>
 
             <Box>
-              <Row2 input={960} h2={180}>
+              <Row2 input={880} h2={200}>
                 <h2>Prefixo número de registro: </h2>
                 <input 
                   value={courseRegisterNumber}
@@ -112,7 +112,7 @@ function CoursesEdit({ onSubmit }) {
             </Box>
 
             <Box>
-              <Row2 input={960} h2={180}>
+              <Row2 input={880} h2={200}>
                 <h2>Certificado com verso? </h2>
                 <input 
                   value={courseVerse}
@@ -128,7 +128,7 @@ function CoursesEdit({ onSubmit }) {
             </Box>
 
             <Box>
-              <Row2 input={960} h2={180}>
+              <Row2 input={880} h2={200}>
                 <h2>Certificado com histórico? </h2>
                 <input 
                   value={courseHistoric}

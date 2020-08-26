@@ -17,7 +17,7 @@ function CertificateInformation() {
   const [studentCPF, setStudentCPF] = useState('');
   const [studentMail, setStudentMail] = useState('');
   const [note, setNote] = useState('');
-  const [registerNumber, setRegisterNumber] = useState('P3V-NATH0X - Folha 89 do Livro número 03 do Registro de Certificados');
+  const [registerNumber, setRegisterNumber] = useState('');
   const [date, setDate] = useState(`${day}-${extenseMonth}-${year}`);
   const [complet, setComplet] = useState('');
   const [send, setSend] = useState('');
@@ -35,7 +35,6 @@ function CertificateInformation() {
 
   useEffect(() => {
     setSend('');
-    setSignature('');
     async function load() {
       try {
         const response = await api.get('/courses');
@@ -79,10 +78,10 @@ function CertificateInformation() {
       if(courses.filter(course => course.name === selectCourse)[0] !== undefined) {
         alert('Um novo certificado foi gerado com sucesso!');
         setTimeout(() => {
-          alert('Aguarde o certificado ser gerado e você será redirecionado para vizualizar o resultado!.');
+          alert('Aguarde o certificado ser gerado e você será redirecionado para visualizar o resultado!.');
           setTimeout(() => {
             history.push('/certificates-issued');
-          }, 4000);
+          }, 5000);
         }, 1000);
 
 
@@ -96,6 +95,7 @@ function CertificateInformation() {
           complet,
           send,
           seal,
+          signature,
           titration,
           thisCourse,
           course: selectCourse,
@@ -122,7 +122,7 @@ function CertificateInformation() {
           </Course>
 
           <Box>
-            <Row2 input={920} h2={200}>
+            <Row2 input={880} h2={200}>
               <h2>Selecione o curso:</h2>
               <input 
                 value={selectCourse}
@@ -132,6 +132,9 @@ function CertificateInformation() {
                   } else {
                     setCourseID(courses.filter(course => course.name === event.target.value)[0].course_id);
                     setThisCourse(courses.filter(course => course.name === event.target.value)[0]);
+                    var register = courses.filter(course => course.name === event.target.value)[0].register_number;
+                    var split = register.split('-');
+                    setRegisterNumber(`${split[0]}-${split[1]}`);
                   }
                   setSelectCourse(event.target.value);
                 }}
@@ -149,7 +152,7 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={950} h2={170}>
+            <Row2 input={880} h2={200}>
               <h2>Nome completo do aluno:</h2>
               <input 
                 value={studentName}
@@ -159,7 +162,7 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={960} h2={160}>
+            <Row2 input={880} h2={200}>
               <h2>CPF do aluno:</h2>
               <input 
                 pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
@@ -170,7 +173,7 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={940} h2={180}>
+            <Row2 input={880} h2={200}>
               <h2>E-mail do aluno:</h2>
               <input 
                 value={studentMail}
@@ -180,7 +183,7 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={940} h2={180}>
+            <Row2 input={880} h2={200}>
               <h2>Nota do aluno:</h2>
               <input 
                 value={note}
@@ -190,7 +193,7 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={880} h2={240}>
+            <Row2 input={880} h2={200}>
               <h2>Número de Registro:</h2>
               <input 
                 value={registerNumber}
@@ -200,7 +203,7 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={905} h2={215}>
+            <Row2 input={880} h2={200}>
               <h2>Data por extenso:</h2>
               <input 
                 value={date}
@@ -210,7 +213,7 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={940} h2={180}>
+            <Row2 input={880} h2={200}>
               <h2>Simples ou Completo?</h2>
               <input 
                 value={complet}
@@ -226,7 +229,7 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={980} h2={150}>
+            <Row2 input={880} h2={200}>
               <h2>Possui selo?</h2>
               <input 
                 value={seal}
@@ -242,7 +245,23 @@ function CertificateInformation() {
           </Box>
 
           <Box>
-            <Row2 input={1000} h2={130}>
+            <Row2 input={880} h2={200}>
+              <h2>Possui assinatura?</h2>
+              <input 
+                value={signature}
+                onChange={event => setSignature(event.target.value)}
+                list="signaturelList"
+                type="search"
+              />
+              <datalist id="signaturelList">
+                <option value="Sim" />
+                <option value="Não" />
+              </datalist>
+            </Row2>
+          </Box>
+
+          <Box>
+            <Row2 input={880} h2={200}>
               <h2>Titulação:</h2>
               <input 
                 value={titration}

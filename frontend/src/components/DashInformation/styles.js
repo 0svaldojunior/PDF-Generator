@@ -8,6 +8,14 @@ export const Container = styled.div`
   grid-template-columns: auto auto;
   padding: 10px;
   margin-top: 200px;
+
+  @media (max-width: 1300px) {
+    grid-template-columns: auto;
+    overflow: scroll;
+    margin-left: 150px;
+    margin-top: 20px;
+    height: 800px;
+  } 
 `;
 
 export const GridItem = styled.div`

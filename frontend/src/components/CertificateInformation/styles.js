@@ -3,11 +3,15 @@ import styled from 'styled-components';
 export const GlobalContainer = styled.div`
   width: 100%;
   height: 100%;
+
+  @media (max-width: 1300px) {
+    width: 900px;
+  }
 `;
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 750px;
+  height: 700px;
   width: 100%;
 
   &:-webkit-scrollbar {
@@ -55,6 +59,10 @@ export const Row2 = styled(Row)`
     margin-left: 20px;
     text-align: left;
     padding-left: 20px;
+
+    @media (max-width: 1300px) {
+      width: 550px;
+    }
   }
 
   h2 {
@@ -105,5 +113,9 @@ export const Button2 = styled.button`
   &:hover {
     color:#fff;
     background: #4c79d3;
+  }
+
+  @media (max-width: 1300px) {
+    width: 835px;
   }
 `;

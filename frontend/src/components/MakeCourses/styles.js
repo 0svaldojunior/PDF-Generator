@@ -7,8 +7,8 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 750px;
-  width: 100%;
+  height: 800px;
+  width: 1300px;
 `;
 
 export const Container = styled.div`
@@ -19,6 +19,10 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 10px;
   margin-left: 25px;
+
+  @media (max-width: 1300px) {
+    width: 850px;
+  }
 
   h1 {
     font-size: 32px;
@@ -69,6 +73,10 @@ export const Row2 = styled(Row)`
     height: 50px;
     width: ${props => `${props.input}px`};
     align-content: center;
+
+    @media (max-width: 1300px) {
+      width: 550px;
+    }
   }
 
   h2 {

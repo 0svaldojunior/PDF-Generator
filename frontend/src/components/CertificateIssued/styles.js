@@ -7,7 +7,7 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 650px;
+  height: 600px;
   width: 100%;
 `;
 
@@ -19,6 +19,12 @@ export const GridContainer = styled.div`
   grid-template-columns: auto auto;
   padding: 10px;
   margin-bottom: 20px;
+
+  @media (max-width: 1300px) {
+    grid-template-columns: auto;
+    margin-left: 150px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const GridItem = styled.div`
@@ -34,6 +40,7 @@ export const GridItem = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: row;
+  overflow: scroll;
 
   &:hover {
     background: #4c79d3;
@@ -57,7 +64,6 @@ export const GridItem = styled.div`
     align-items: center;
     font-weight: bold;
     margin-left: 20px;
-    margin-top: 10px;
   }
 
   button:hover {
@@ -73,10 +79,10 @@ export const Column = styled.div`
 `;
 
 export const Column2 = styled(Column)`
-  margin-top: 60px;
+  margin-top: 80px;
 `;
 
 export const DivSearchBar = styled.div`
-  margin-bottom: 10px;
   margin-left: 30px;
+  margin-bottom: 10px;
 `;

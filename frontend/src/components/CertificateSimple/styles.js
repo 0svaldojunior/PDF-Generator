@@ -7,7 +7,7 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 650px;
+  height: 600px;
   width: 100%;
 `;
 
@@ -19,6 +19,12 @@ export const GridContainer = styled.div`
   grid-template-columns: auto auto;
   padding: 10px;
   margin-bottom: 20px;
+
+  @media (max-width: 1300px) {
+    grid-template-columns: auto;
+    margin-left: 150px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const GridItem = styled.div`
@@ -76,6 +82,6 @@ export const Column2 = styled(Column)`
 `;
 
 export const DivSearchBar = styled.div`
-  margin-bottom: 10px;
   margin-left: 30px;
+  margin-bottom: 10px;
 `;

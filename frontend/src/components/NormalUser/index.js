@@ -125,6 +125,9 @@ function CertificateInformation() {
         const response = await api.post('/create-pdf', data);
         console.log(response);
         api.post('/certificates', response.data);
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 3000);
       }
     }
   };

@@ -23,6 +23,12 @@ export const NewButtons = styled.button`
   border-radius: 8px;
   margin-left: 10px;
 
+  @media(max-width:1300px) {
+    width: 160px;
+    margin: 3px;
+    margin-left: 2px;
+  }
+
   &:hover {
     background: #4c79d3;
     color: #fff;

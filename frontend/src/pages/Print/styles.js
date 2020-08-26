@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  height: 100%;
+  max-width: 1600px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  height: 120px;
-  width: 650px;
-  margin-left: 320px;
-
-  @media (max-width: 1300px) {
-    margin-left: 200px;
-  }
 `;

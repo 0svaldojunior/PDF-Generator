@@ -6,6 +6,7 @@ exports.up = function(knex) {
         table.boolean('complet').notNull();
         table.boolean('send').notNull();
         table.boolean('seal').notNull();
+        table.boolean('signature').notNull();
         table.string('author').notNull();
         table.string('course').notNull();
         table.string('student_name').notNull();

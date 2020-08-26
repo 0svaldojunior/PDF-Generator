@@ -51,8 +51,6 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
           }
 
           .bg-image {
-            background-image: url('https://vision-certificates.s3-sa-east-1.amazonaws.com/certificate/BG-SealMaster.png');
-            background-color: #cccccc;
             height: 575px;
             background-position: center;
             background-repeat: no-repeat;
@@ -154,6 +152,7 @@ module.exports = ({ studentName, studentCPF, studentMail, note, registerNumber, 
       </head>
       <body>
         <div class="bg-image">
+          <img height="1000" src="https://vision-certificates.s3-sa-east-1.amazonaws.com/certificate/BG-SealMaster.png"/>
           <div class="information">
             <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <u>Certificado</u>

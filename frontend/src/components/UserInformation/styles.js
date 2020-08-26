@@ -10,12 +10,22 @@ export const ScrollContainer = styled.div`
   width: 100%;
   max-width: 100%;
   margin-top: 5px;
+
+  @media (max-width: 1300px) {
+    margin-left: 20px;
+  }
 `;
 
 export const Container = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   padding: 10px;
+
+  @media (max-width: 1300px) {
+    overflow-x: scroll;
+    width: 680px;
+    margin-left: 150px;
+  }
 `;
 
 export const GridItem = styled.div`
@@ -85,6 +95,12 @@ export const ListGridItem = styled(GridItem)`
 
 export const ListGridContainer = styled(Container)`
   grid-template-columns: auto auto auto;
+
+  @media (max-width: 1300px) {
+    width: 450px;
+    margin-left: 230px;
+    overflow-y: scroll;
+  }
 `;
 
 export const Row = styled.div`
@@ -101,4 +117,8 @@ export const SearchPadding = styled.div`
   margin-left: 50px;
   align-items: center;
   align-content: center;
+  
+  @media (max-width: 1300px) {
+    width: 900px;
+  }
 `;

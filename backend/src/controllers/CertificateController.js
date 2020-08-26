@@ -10,13 +10,14 @@ module.exports = {
 
     // Através dos dados fornecidos no corpo da requisição, é feita a inserção na tabela mencionda
     async create(request, response) {
-        const { date, complet, send, seal, author, course, student_name, student_mail, url } = request.body;
+        const { date, complet, send, signature, seal, author, course, student_name, student_mail, url } = request.body;
 
         const certificate = await connection('certificates').insert({
             date, 
             complet, 
             send, 
-            seal, 
+            seal,
+            signature, 
             author, 
             course,
             student_name,

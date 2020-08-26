@@ -5,6 +5,7 @@ import Logon from './pages/Logon';
 import Dashboard from './pages/Dashboard';
 import Certificates from './pages/Certificat';
 import CertificatesComplete from './pages/Complete';
+import CertificatesPrint from './pages/Print';
 import CertificatesSimple from './pages/Simple';
 import CertificatesIssued from './pages/Issued';
 import OldCertificates from './pages/OldCertificates';
@@ -28,6 +29,7 @@ export default function Routes() {
         <Route path = "/certificates" component = { Certificates } />
         <Route path = "/certificates-complete" component = { CertificatesComplete } />
         <Route path = "/certificates-simple" component = { CertificatesSimple } />
+        <Route path = "/certificates-print" component = { CertificatesPrint } />
         <Route path = "/certificates-issued" component = { CertificatesIssued } />
         <Route path = "/old-certificates" component = { OldCertificates } />
       </Switch>

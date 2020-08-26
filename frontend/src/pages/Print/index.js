@@ -4,10 +4,10 @@ import GlobalStyles from '../../styles/global';
 import { Container } from './styles';
 
 import DashMenu from '../../components/DashMenu';
-import CertificateComplete from '../../components/CertificateComplete';
+import CertificateComplete from '../../components/CertificatePrints';
 
 
-class Complete extends Component {
+class Print extends Component {
   render () {
     return(
       <Container>
@@ -19,4 +19,4 @@ class Complete extends Component {
   }
 }
 
-export default Complete;
+export default Print;
