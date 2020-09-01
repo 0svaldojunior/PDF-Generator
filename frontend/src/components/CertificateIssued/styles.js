@@ -16,20 +16,20 @@ export const GridContainer = styled.div`
   height: 100%;
   max-width: 1380px;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
   padding: 10px;
   margin-bottom: 20px;
 
   @media (max-width: 1300px) {
     grid-template-columns: auto;
-    margin-left: 150px;
+    /* margin-left: 150px; */
     margin-bottom: 20px;
   }
 `;
 
 export const GridItem = styled.div`
   height: 400px;
-  width: 650px;
+  width: auto;
   background: #3A5BA2;
   color: #fff;
   font-weight: bold;
@@ -40,7 +40,6 @@ export const GridItem = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: row;
-  overflow: scroll;
 
   &:hover {
     background: #4c79d3;

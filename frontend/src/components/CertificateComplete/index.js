@@ -77,14 +77,6 @@ function CertificateComplete() {
           {
             certificates.filter(certificate => certificate.complet === true && certificate.send === true).map(certificate => (
               <GridItem key={generaterKey(certificate.certificate_id)} >
-                <Column>
-                  <h1>Aluno: {certificate.student_name} </h1>
-                  <h1>E-mail: {certificate.student_mail} </h1>
-                  <h1>Curso: {certificate.course} </h1>
-                  <h1>Data: {certificate.date} </h1>
-                  <h1>Emissor: {certificate.author} </h1>
-                </Column>
-                
                 <Column2> 
                   <a href={certificate.url} target='_blank' >
                     <button>Visualizar</button>
@@ -92,10 +84,10 @@ function CertificateComplete() {
 
                   <a>
                     <button onClick={() => { 
-                      alert('Re-envio realizado com sucesso!');
+                      alert('Reenvio realizado com sucesso!');
                       sendMail(certificate.student_mail, certificate.course, certificate.url, certificate.certificate_id) 
                     }}>
-                      Re-Enviar
+                      Reenviar
                     </button>
                   </a>
 
@@ -103,6 +95,14 @@ function CertificateComplete() {
                     <button onClick={() => { handleDeleteCertificate(certificate.certificate_id) }} >Deletar</button>
                   </a>
                 </Column2>
+                
+                <Column>
+                  <h1>Aluno: {certificate.student_name} </h1>
+                  <h1>E-mail: {certificate.student_mail} </h1>
+                  <h1>Curso: {certificate.course} </h1>
+                  <h1>Data: {certificate.date} </h1>
+                  <h1>Emissor: {certificate.author} </h1>
+                </Column>
               </GridItem>
             ))
           }

@@ -8,7 +8,7 @@ export const GlobalContainer = styled.div`
 
 export const ScrollContainer = styled.div`
   overflow: scroll;
-  height: 520px;
+  height: 670px;
   width: 100%;
   max-width: 1380px;
   margin-top: 10px;
@@ -28,7 +28,7 @@ export const GridContainer = styled.div`
 `;
 
 export const GridItem = styled.div`
-  height: 500px;
+  height: 250px;
   width: 95%;
   background: #3A5BA2;
   color: #fff;
@@ -42,7 +42,7 @@ export const GridItem = styled.div`
   flex-direction: row;
 
   @media (max-width: 1300px) {
-    height: 650px;
+    height: 280px;
   }
 
   &:hover {
@@ -79,14 +79,14 @@ export const GridItem = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 5px;
   height: 120px;
 `;
 
 export const Column2 = styled(Column)`
-  margin-top: 180px;
-  margin-left: 300px;
+  margin-top: 45px;
 
   @media (max-width: 1300px) {
-    margin-top: 250px;
+    margin-top: 55px;
   }
 `;

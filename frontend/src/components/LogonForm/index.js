@@ -27,12 +27,12 @@ function LogonForm({ onSubmit }) {
     event.preventDefault();
 
     try {
-      const response = await api.post('dashboard', { mail, password });
+      await api.post('dashboard', { mail, password });
       // const response2 = await api.get('users');
       // setUsers(response2.data);
 
       localStorage.setItem('mail', mail);
-      localStorage.setItem('@Logon/response', response);
+      // localStorage.setItem('@Logon/response', response);
       const type = users.filter(user => user.mail === mail)[0].type;
       console.log(type);
 
@@ -46,7 +46,7 @@ function LogonForm({ onSubmit }) {
   return (
     <Container>
       <Image src={logoimg} />
-      <Form onSubmit={handleLogin}>
+      <Form onSubmit={handleLogin} method='post' >
         <Title>Seja Bem Vindo!</Title>
         <input 
           placeholder = "E-mail"

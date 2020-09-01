@@ -80,14 +80,6 @@ function CertificateIssued() {
           {
             certificates.filter(certificate => certificate.send === false).map(certificate => (
               <GridItem key={generaterKey(certificate.certificate_id)} >
-                <Column>
-                  <h1>Aluno: {certificate.student_name} </h1>
-                  <h1>E-mail: {certificate.student_mail} </h1>
-                  <h1>Curso: {certificate.course} </h1>
-                  <h1>Data: {certificate.date} </h1>
-                  <h1>Emissor: {certificate.author} </h1>
-                </Column>
-                
                 <Column2>
                   <a href={certificate.url} target='_blank' >
                     <button>Visualizar</button>
@@ -95,7 +87,7 @@ function CertificateIssued() {
 
                   <a>
                     <button onClick={() => { 
-                      sendMail(certificate.student_mail, certificate.course, certificate.url, certificate.certificate_id) 
+                      sendMail(`${certificate.student_mail}, certificados@institutoterceiravisao.com.br`, certificate.course, certificate.url, certificate.certificate_id) 
                     }}>
                       Enviar
                     </button>
@@ -105,6 +97,14 @@ function CertificateIssued() {
                     <button onClick={() => { handleDeleteCertificate(certificate.certificate_id) }} >Deletar</button>
                   </a>
                 </Column2>
+                
+                <Column>
+                  <h1>Aluno: {certificate.student_name} </h1>
+                  <h1>E-mail: {certificate.student_mail} </h1>
+                  <h1>Curso: {certificate.course} </h1>
+                  <h1>Data: {certificate.date} </h1>
+                  <h1>Emissor: {certificate.author} </h1>
+                </Column>
               </GridItem>
             ))
           }

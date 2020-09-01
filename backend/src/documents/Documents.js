@@ -13,7 +13,7 @@ const BGHistoric = './src/assets/img/BG-Historic.png';
 const BGStudent = './src/assets/img/BG-Student.png';
 
 module.exports = {
-  pdfGenerator({studentName, studentCPF, studentMail, note, date, complet, signature, seal, titration, thisCourse, course, pdfName, author, registerNumber}, fileName, response) {
+  pdfGenerator({studentName, studentCPF, studentMail, note, date, complet, signature, seal, titration, thisCourse, course, pdfName, author, registerNumber, courseID}, fileName, response) {
     var dates = `${date}`;
     var name = `${studentName}`;
     var courseName = `${course}`;
@@ -42,6 +42,9 @@ module.exports = {
     var splitRegisterNumber = registerNumber.split('-');
     console.log(splitRegisterNumber);
     var newRegisterNumber = `${splitRegisterNumber[0].trim()}-${splitRegisterNumber[1].trim()}`;
+    var splitFullRN = thisCourse.register_number.split('-');
+    var fullRegisterNumber = `${splitRegisterNumber[0].trim()}-${splitRegisterNumber[1].trim()} - ${splitFullRN[2]}`;
+    console.log(fullRegisterNumber);
 
     var sizeCourseName;
     if(courseName.length === 1) {
@@ -54,6 +57,18 @@ module.exports = {
       template = signature === 'Sim' ? BGSeal : PrintBGSeal;
     } else {
       template = signature === 'Sim' ? BGNotSeal : PrintNotBGSeal;
+    }
+
+    var boxSize;
+    var size1 = thisCourse.content.split('<br />').length;
+    var size2 = thisCourse.content.split('</li>').length;
+    var size3 = thisCourse.content.split('</p>').length;
+    if(size1 > size2 && size1 > size3) {
+      boxSize = 10 + thisCourse.content.split('<br />').length * 11;
+    } else if(size3 > size2 && size3 > size1) {
+      boxSize = 10 + thisCourse.content.split('</p>').length * 22;
+    } else {
+      boxSize = 10 + thisCourse.content.split('</li>').length * 11;
     }
 
     const pdf = new PDFDocument({
@@ -100,12 +115,12 @@ module.exports = {
 
     if(titrations.length < 1) {
       pdf.font('./src/assets/fonts/DejaVuSerifCondensed.ttf', 16)
-        .text(`tendo alcaçado excelente nível de aproveitamento.`, 495 - (49 * 3.70), 325)
+        .text(`tendo alcançado excelente nível de aproveitamento.`, 495 - (49 * 3.70), 325)
         .font('./src/assets/fonts/DejaVuSerifCondensed.ttf', 16)
         .text(`Registro do Certificado:${newRegisterNumber}.`, 495 - ((24 + newRegisterNumber.length) * 3.70), 350);
     } else {
       pdf.font('./src/assets/fonts/DejaVuSerifCondensed.ttf', 16)
-        .text(`tendo alcaçado excelente nível de aproveitamento,`, 495 - (49 * 3.70), 325)
+        .text(`tendo alcançado excelente nível de aproveitamento,`, 495 - (49 * 3.70), 325)
         .font('./src/assets/fonts/DejaVuSerifCondensed-Bold.ttf', 16)
         .text(`obtendo a Titulação de ${titrations}.`, sizeSpaceTitrations, 350)
         .font('./src/assets/fonts/DejaVuSerifCondensed.ttf', 16)
@@ -128,7 +143,7 @@ module.exports = {
         .text(`NOME: ${name}`, 115, 200)
         .text(`CURSO: ${courseName}`, 115, 230)
         .text(`TOTAL DE HORAS AULA: ${workload}`, 115, 260)
-        .text(`REGISTRO: ${thisCourse.register_number}`, 115, 290)
+        .text(`REGISTRO: ${fullRegisterNumber}`, 115, 290)
         .text(`CPF: ${cpf}`, 580, 200)
         .text('FREQUÊNCIA: 100%', 580, 230)
         .text(`NOTA: ${notes}`, 580, 260)
@@ -151,7 +166,7 @@ module.exports = {
       .text(`NOME: ${name}`, 21, 90)
       .text(`CURSO: ${courseName}`, 21, 120)
       .text(`TOTAL DE HORAS AULA: ${workload}`, 21, 150)
-      .text(`REGISTRO: ${thisCourse.register_number}`, 21, 180)
+      .text(`REGISTRO: ${fullRegisterNumber}`, 21, 180)
       .text(`CPF: ${cpf}`, 462, 90)
       .text('FREQUÊNCIA: 100%', 462, 120)
       .text(`NOTA: ${notes}`, 462, 150)
@@ -166,7 +181,7 @@ module.exports = {
           height: 540,
           width: 540,
           align: 'justify'})
-        .rect(20, 250, 560, 560).stroke();
+        .rect(20, 250, 560, boxSize).stroke();
 
       pdf.font('./src/assets/fonts/DejaVuSerifCondensed.ttf', 10)
         .fill('#262626')
@@ -184,7 +199,7 @@ module.exports = {
       Body: pdf,
       ACL: 'public-read',
       Bucket: 'vision-certificates',
-      Key: (fileName + pdfName),
+      Key: (courseID + fileName + pdfName),
       ContentType: 'application/pdf',
     };
     s3Client.upload(params, function(err, data) {

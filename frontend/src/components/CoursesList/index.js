@@ -57,19 +57,20 @@ function CoursesList() {
               {
                 courses.map(course => (
                   <GridItem key={generaterKey(course.course_id)}>
-                    <Column>
-                      <h1>Nome: {course.name}</h1>
-                      <h1>Carga horária: {course.workload} | Número de Registro: {course.register_number}</h1>
-                      <h1>Verso: {course.verse === true ? 'Sim' : 'Não'} | Histórico: {course.historic === true ? 'Sim' : 'Não'}</h1>
-                      <h1>Conteúdo: Clique em Editar para vizualizar</h1>
-                      <h1>Assunto do E-mail: {course.subject}</h1>
-                      <h1>Conteúdo do E-mail: Clique em Editar para vizualizar</h1>
-                    </Column>
-                    
                     <Column2>
                       <button onClick={() => history.push('/courses-edit', {course})}>Editar</button>
                       <button onClick={() => handleDeleteCourse(course.course_id)}>Deletar</button>
                     </Column2>
+                    
+                    <Column>
+                      <h1>Nome: {course.name}</h1>
+                      <h1>Carga horária: {course.workload} </h1>
+                      {/* <h1>Número de Registro: {course.register_number}</h1> */}
+                      <h1>Verso: {course.verse === true ? 'Sim' : 'Não'} | Histórico: {course.historic === true ? 'Sim' : 'Não'}</h1>
+                      {/* <h1>Conteúdo: Clique em Editar para visualizar</h1>
+                      <h1>Assunto do E-mail: {course.subject}</h1>
+                      <h1>Conteúdo do E-mail: Clique em Editar para visualizar</h1> */}
+                    </Column>
                   </GridItem>
                 ))
               }
